@@ -71,20 +71,20 @@ export const constantRoutes = [
       {
         path: 'inspect',
         name: 'Inspect',
-        component: () => import('@/views/tree/index'),
+        component: () => import('@/views/flink/index'),
         meta: { title: '资源窥探', icon: 'table' }
       }
     ]
   },
 
   {
-    path: '/form',
+    path: '/cluster',
     component: Layout,
     children: [
       {
         path: 'index',
         name: 'Form',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/cluster/index'),
         meta: { title: 'Form', icon: 'form' }
       }
     ]
@@ -102,19 +102,19 @@ export const constantRoutes = [
     children: [
       {
         path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
+        component: () => import('@/views/nested/menu1/menu1-2/menu1-2-6'), // Parent router-view
         name: 'Menu1',
         meta: { title: 'Menu1' },
         children: [
           {
             path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
+            component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
             name: 'Menu1-1',
             meta: { title: 'Menu1-1' }
           },
           {
             path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
+            component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
             name: 'Menu1-2',
             meta: { title: 'Menu1-2' },
             children: [
@@ -134,7 +134,7 @@ export const constantRoutes = [
           },
           {
             path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
+            component: () => import('@/views/nested/menu1/menu1-2/menu1-2-3'),
             name: 'Menu1-3',
             meta: { title: 'Menu1-3' }
           }

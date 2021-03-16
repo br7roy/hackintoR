@@ -1,0 +1,184 @@
+[app]
+remoteAddr = "10.90.44.73"
+remotePort = "2000"
+usingNC = true #  是否使用NC反弹shell
+usingSH = false # true:sh or false:bash
+test = true #  是否测试模式
+
+[app.schedule]
+userName = "futx" # 调度系统使用的用户名
+
+[app.scpInfo]
+root = "/home/realestate_test/futh/dist/sbin/cal" #  脚本的根路径
+dataSync = "flow-data-sync"
+gpsConfigure = "flow-gps-pre"
+batchDaily = "flow-batch1-daily"
+batchResult = "flow-batch2-result"
+batchPy = "flow-batch3-py"
+month = "flow-batch-mon"
+
+[app.bus]
+
+[[app.bus.portrait]]
+name = "上传"
+type = 0
+
+[[app.bus.portrait]]
+name = "媒介"
+type = 1
+
+[[app.bus.portrait]]
+name = "客群来源去向"
+type = 2
+
+[[app.bus.portrait]]
+name = "客群来源去向"
+type = 3
+
+[[app.bus.portrait]]
+name = "全国客流"
+type = 4
+
+[[app.bus.portrait]]
+name = "基础画像"
+type = 5
+
+[[app.bus.portrait]]
+name = "thermalchartofsourceflow"
+type = 6
+
+[[app.bus.portrait]]
+name = "周边"
+type = 7
+
+[[queue]]
+queueName = "root.app"
+
+[[queue]]
+queueName = "root.yanjiuyuan"
+
+[[queue]]
+queueName = "root.yarn_ping_cone"
+
+[[queue]]
+queueName = "root.mob_ronghui"
+
+[[queue]]
+queueName = "urgent"
+
+[[queue]]
+queueName = "root.yarn_app360.app360_test"
+
+[[queue]]
+queueName = "root.yarn_app360.app360"
+
+[[queue]]
+queueName = "root.yarn_ga_distcp_hfile"
+
+[[queue]]
+queueName = "root.yarn_analyst.analyst1"
+
+[[queue]]
+queueName = "root.yarn_analyst.analyst2"
+
+[[queue]]
+queueName = "root.yarn_analyst.analyst3"
+
+[[queue]]
+queueName = "root.yarn_dataengine_ai.dataengine_ai_test"
+
+[[queue]]
+queueName = "root.yarn_dataengine_ai.dataengine_ai"
+
+[[queue]]
+queueName = "root.yarn_dpi.dpi_test"
+
+[[queue]]
+queueName = "root.yarn_dpi.dpi"
+
+[[queue]]
+queueName = "root.yarn_etl.etl_test"
+
+[[queue]]
+queueName = "root.yarn_etl.etl"
+
+[[queue]]
+queueName = "root.yarn_mobdashboard.mobdashboard_test"
+
+[[queue]]
+queueName = "root.yarn_mobdashboard.mobdashboard"
+
+[[queue]]
+queueName = "root.yarn_datax.datax_test"
+
+[[queue]]
+queueName = "root.yarn_datax.datax"
+
+[[queue]]
+queueName = "root.yarn_marketplus.marketplus_test"
+
+[[queue]]
+queueName = "root.yarn_marketplus.marketplus"
+
+[[queue]]
+queueName = "root.yarn_ping_cone"
+
+[[queue]]
+queueName = "root.yarn_ga.ga_test"
+
+[[queue]]
+queueName = "root.yarn_ga.ga"
+
+[[queue]]
+queueName = "root.yarn_mobfin.mobfin_test"
+
+[[queue]]
+queueName = "root.yarn_mobfin.mobfin"
+
+[[queue]]
+queueName = "root.yarn_mobeye.mobeye_test"
+
+[[queue]]
+queueName = "root.yarn_mobeye.mobeye"
+
+[[queue]]
+queueName = "root.yarn_etl_streaming"
+
+[[queue]]
+queueName = "root.yarn_distcp_hfile.master"
+
+[[queue]]
+queueName = "root.yarn_distcp_hfile.slave"
+
+[[queue]]
+queueName = "root.yarn_realestate.realestate_test"
+
+[[queue]]
+queueName = "root.yarn_realestate.realestate"
+
+[[queue]]
+queueName = "root.yarn_mobdi.mobdi_test"
+
+[[queue]]
+queueName = "root.yarn_mobdi.dba"
+
+[[queue]]
+queueName = "root.default"
+
+[[queue]]
+queueName = "root.yarn_dataengine.dataengine_mr"
+
+[[queue]]
+queueName = "root.yarn_dataengine.dataengine_test"
+
+[[queue]]
+queueName = "root.yarn_dataengine.dataengine"
+
+[[queue]]
+queueName = "root.yarn_supplement_data"
+
+[[queue]]
+queueName = "root.yarn_qc.qc_test"
+
+[[queue]]
+queueName = "root.yarn_qc.qc"

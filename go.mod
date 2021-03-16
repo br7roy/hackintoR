@@ -3,8 +3,7 @@ module hackintoR
 go 1.15
 
 require (
-	github.com/labstack/echo v3.3.10+incompatible
-	github.com/labstack/gommon v0.3.0 // indirect
+	github.com/BurntSushi/toml v0.1.0
+	github.com/fsnotify/fsnotify v1.4.9
 	github.com/rakyll/statik v0.1.7
-	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 )

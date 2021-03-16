@@ -2,11 +2,15 @@ package go_test
 
 import (
 	"fmt"
+	"github.com/BurntSushi/toml"
+	"hackintoR/main/opts"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
+	"sync"
 	"testing"
 )
 
@@ -53,7 +57,78 @@ func TestShExec(t *testing.T) {
 	println(string(out))
 }
 
-func TestQueue(t *testing.T) {
-	//param := "root.yarn_mobfin,root.mob_ronghui,root.yarn_dataengine,root.yarn_qc,root.yarn_analyst,root.yarn_data_compliance,root.yarn_dpi,root.yarn_dataengine_ai,root.urgent,root.yarn_distcp_hfile,root.yarn_realestate,root.yarn_mobeye,root.yarn_marketplus,root.yarn_mobdashboard,root.yarn_etl,root.default,root.yarn_mobdi,root.yarn_app360,root.yarn_supplement_data,root.yarn_ga,root.yarn_datax,root.yanjiuyuan,root.app,\n"
+var (
+	once sync.Once
+)
 
+/*func TestReadYaml(t *testing.T) {
+
+  // https://yaml.to-go.online/
+  // https://www.coder.work/article/212175
+  once.Do(func() {
+
+    filePath, err := filepath.Abs("../conf.yml")
+    if err != nil {
+      panic(err)
+    }
+    yamlFile, err := ioutil.ReadFile(filePath)
+
+    if err != nil {
+      fmt.Printf("yamlFile.Get err #%v ", err)
+    }
+
+    conf := new(opts.YmlConfig)
+
+    err = yaml.Unmarshal(yamlFile, conf)
+
+    if err != nil {
+      panic(err)
+    }
+
+    for _, ele := range conf.Queue {
+      name := ele.QueueName
+      if name != "" {
+        fmt.Printf("q name:%s\n", name)
+      }
+
+    }
+
+  })
+
+}*/
+
+func TestReadToml(t *testing.T) {
+	cfg := new(opts.TomlConfig)
+	once.Do(func() {
+		filePath, err := filepath.Abs("../conf.toml")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("parse toml file once. filePath: %s\n", filePath)
+		if _, err := toml.DecodeFile(filePath, &cfg); err != nil {
+			panic(err)
+		}
+		fmt.Println(cfg)
+	})
+
+}
+func TestJsonPost(t *testing.T) {
+	url := "http://scheduler.paas.internal.mob.com/api/markTaskStatus"
+	// 表单数据
+	// json
+	contentType := "application/json"
+	data := `{"task_id":11697707,"status":4,"job_id":163270 ,"user_name":"futx"}`
+	resp, err := http.Post(url, contentType, strings.NewReader(data))
+	if err != nil {
+		fmt.Printf("post failed, err:%v\n", err)
+		return
+	}
+	defer resp.Body.Close()
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("get resp failed, err:%v\n", err)
+		return
+	}
+	fmt.Printf("resposne:\n")
+	fmt.Println(string(b))
 }

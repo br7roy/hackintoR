@@ -8,6 +8,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/fsnotify/fsnotify"
 	"github.com/rakyll/statik/fs"
 	"hackintoR/main/opts"
 	_ "hackintoR/main/statik"
@@ -28,6 +29,7 @@ var (
 
 type Config struct {
 	ServerHost string
+	ConfigPath string
 }
 
 var config *Config
@@ -58,31 +60,81 @@ func main() {
 		}
 	}(config.ServerHost, mux)
 
-	// for test don't open browser automatic
-	openPage()
+	// for test do not open the browser automatic
+	// trigger it on conf.toml
+	if !opts.LoadConfig(config.ConfigPath).App.Test {
+		openPage()
+	}
 
 	handleSignals()
 
+	// test fo echo server ,ignore it
 	/*	e := echo.New()
 		e.GET("/", func(c echo.Context) error {
 			return c.String(http.StatusOK, "Hello, World!")
 		})
-		e.Logger.Fatal(e.Start(":6660"))*/
+		e.Logger.Fatal(e.Start(":666"))*/
 
 }
+
 func parseFlags() {
 	config = &Config{}
-	flag.StringVar(&config.ServerHost, "hackintoR", "localhost:20000", "local server address")
+	flag.StringVar(&config.ServerHost, "p", "localhost:20000", "local server address")
+	flag.StringVar(&config.ConfigPath, "c", "./conf.toml", "config file path")
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		fmt.Fprintf(Stderr, "Usage of %s:\n", os.Args[0])
 		flag.PrintDefaults()
 	}
 	flag.Parse()
 }
+
 func handleSignals() {
+	go handleFileSysCall()
+	// 确保最后监听系统调用事件
+	handleSysCall()
+}
+
+func handleSysCall() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
 	<-c
+}
+
+func handleFileSysCall() {
+	var confPath = config.ConfigPath
+	fmt.Println("config path:", confPath)
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		fmt.Println("ERROR", err)
+	}
+	defer watcher.Close()
+	done := make(chan bool)
+	go func() {
+		for {
+			select {
+			case event, ok := <-watcher.Events:
+				if !ok {
+					return
+				}
+				log.Println("event:", event)
+				if event.Op&fsnotify.Write == fsnotify.Write {
+					log.Println("modified file:", event.Name)
+					opts.TriggerReload(confPath)
+				}
+			case err, ok := <-watcher.Errors:
+				if !ok {
+					return
+				}
+				log.Println("error:", err)
+			}
+		}
+	}()
+
+	err = watcher.Add(confPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	<-done
 }
 
 func openPage() {
@@ -104,6 +156,7 @@ func openPage() {
 		fmt.Println(err)
 	}
 }
+
 func runCmd(prog string, args ...string) error {
 	cmd := exec.Command(prog, args...)
 	cmd.Stdout = Stdout

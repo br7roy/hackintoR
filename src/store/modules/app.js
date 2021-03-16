@@ -1,11 +1,15 @@
 import Cookies from 'js-cookie'
+import {listType} from "@/api/app";
 
 const state = {
   sidebar: {
     opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
   },
-  device: 'desktop'
+  device: 'desktop',
+  form: {
+    prdEnv: false
+  }
 }
 
 const mutations = {
@@ -25,6 +29,9 @@ const mutations = {
   },
   TOGGLE_DEVICE: (state, device) => {
     state.device = device
+  },
+  CHANGE_ENV: (state, env) => {
+    state.form.prdEnv = env
   }
 }
 
@@ -37,7 +44,11 @@ const actions = {
   },
   toggleDevice({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
+  },
+  changeEnv({ commit }, env) {
+    commit('CHANGE_ENV', env)
   }
+
 }
 
 export default {
