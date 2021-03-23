@@ -41,7 +41,6 @@ export default {
   methods: {
     onSubmit() {
       this.$message('submit!')
-      console.log(JSON.stringify(this.form))
       this.$post('/result',
         this.form)
         .then((response) => {

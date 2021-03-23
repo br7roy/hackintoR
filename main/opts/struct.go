@@ -16,12 +16,15 @@ type Params struct {
 	Uuids     []struct {
 		Value string `json:"value"`
 	} `json:"uuids"`
-	Cmd     string `json:"cmd"`
-	Secreat string `json:"secreat"`
-	ClsName string `json:"clsName"`
-	JobId   int    `json:"jobId"`
-	TaskId  []int  `json:"taskId"`
-	Stat    int    `json:"stat"`
+	Cmd       string `json:"cmd"`
+	Secreat   string `json:"secreat"`
+	ClsName   string `json:"clsName"`
+	JobId     int    `json:"jobId"`
+	TaskId    []int  `json:"taskId"`
+	Stat      int    `json:"stat"`
+	LoginName string `json:"loginName"`
+	Password  string `json:"password"`
+	Token     string `json:"token"`
 }
 
 type JsonResult struct {

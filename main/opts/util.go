@@ -3,6 +3,7 @@ package opts
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/satori/go.uuid"
 	"io/ioutil"
 	"net/http"
 	"os/exec"
@@ -135,4 +136,9 @@ func JsonPost(url string, reqData string) (bool, string) {
 	fmt.Printf("resposne:\n")
 	fmt.Println(string(b))
 	return true, string(b)
+}
+
+func GenUUID(seed ...uint8) string {
+	v4 := uuid.NewV4()
+	return v4.String()
 }

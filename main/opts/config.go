@@ -34,6 +34,14 @@ type TomlConfig struct {
 				Type int    `toml:"type"`
 			} `toml:"portrait"`
 		} `toml:"bus"`
+		Db struct {
+			UserName   string `toml:"userName"`
+			Password   string `toml:"password"`
+			Url        string `toml:"url"`
+			Port       int    `toml:"port"`
+			StoreHouse string `toml:"storeHouse"`
+			Type       string `toml:"type"`
+		} `toml:"db"`
 	} `toml:"app"`
 	Queue []struct {
 		QueueName string `toml:"queueName"`

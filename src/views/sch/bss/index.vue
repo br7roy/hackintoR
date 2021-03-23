@@ -53,7 +53,6 @@ export default {
       for (let i = this.form.taskId1; i <= this.form.taskId2; i++) {
         this.form.taskId.push(i)
       }
-      console.log(this.form.taskId)
       if (!this.form.stat) {
         this.form.stat = 5
       } else {

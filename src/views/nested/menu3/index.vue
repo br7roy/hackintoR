@@ -37,13 +37,12 @@ export default {
     this.queryHxtp()
   },
   created() {
-    alert(this.baseURL)
+    // alert(this.baseURL)
     // 为渲染,较之挂载,块那么一点
   },
   methods: {
     onSubmit() {
       this.$message('submit!')
-      console.log(JSON.stringify(this.form))
       this.$post('/definePoly',
         this.form)
         .then((response) => {

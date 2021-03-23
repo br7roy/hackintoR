@@ -60,7 +60,6 @@
   </div>
 </template>
 <script>
-import {listType} from '@/api/app'
 
 export default {
   data() {
@@ -87,7 +86,6 @@ export default {
   methods: {
     onSubmit() {
       this.$message('submit!')
-      console.log(JSON.stringify(this.form))
       this.$post('/definePoly',
         this.form)
         .then((response) => {
@@ -119,20 +117,8 @@ export default {
       })
     },
     queryHxtp() {
-
-      // getList().then(response => {
-      //   console.log(response)
-      // })
-
-      // listType().then(response => {
-      //   console.log(response)
-      //   this.data = response.data
-      // })
-
       this.$post('/hxtp',this.form)
         .then((response) => {
-          console.log(response)
-          console.log(response.data)
           this.data = response.data
         }).catch(err =>{
           console.log(err)

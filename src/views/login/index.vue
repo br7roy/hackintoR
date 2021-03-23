@@ -3,18 +3,18 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">鸡肋系统</h3>
+        <h3 class="title">HackIntoR</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="loginName">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
+          ref="loginName"
+          v-model="loginForm.loginName"
           placeholder="Username"
-          name="username"
+          name="loginName"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -44,7 +44,7 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
+        <span style="margin-right:20px;">loginName: admin</span>
         <span> password: any</span>
       </div>
 
@@ -60,7 +60,7 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('用户名是数字英文或下划线'))
       } else {
         callback()
       }
@@ -74,11 +74,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
+        loginName: 'admin',
         password: '111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        loginName: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
@@ -112,7 +112,11 @@ export default {
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
-          }).catch(() => {
+          }).catch((response) => {
+            this.$message({
+              message: response,
+              type: 'error'
+            })
             this.loading = false
           })
         } else {

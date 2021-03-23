@@ -45,7 +45,6 @@ export default {
   methods: {
     onSubmit() {
       this.$message('As your command!')
-      console.log(JSON.stringify(this.form))
       this.$post('/localshell',
         this.form)
         .then((response) => {

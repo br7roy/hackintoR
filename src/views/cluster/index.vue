@@ -61,7 +61,6 @@ export default {
             type: resp.code === 0 ? 'success' : 'error'
           })
         })
-      console.log(JSON.stringify(this.form))
     },
     onCancel() {
       this.$message({

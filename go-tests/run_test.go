@@ -132,3 +132,35 @@ func TestJsonPost(t *testing.T) {
 	fmt.Printf("resposne:\n")
 	fmt.Println(string(b))
 }
+
+func TestQ(t *testing.T) {
+	opts.LoadConfig("../conf.toml")
+	opts.InitDB()
+	var u opts.User
+	entry, e := u.QueryByEntry("admin", "222")
+	if e != nil {
+		fmt.Println(e)
+	} else {
+		fmt.Println(entry)
+	}
+
+}
+func TestSave(t *testing.T) {
+	opts.LoadConfig("../conf.toml")
+	opts.InitDB()
+	var user opts.User
+	user.QueryByEntry("dev", "333")
+	uuid := opts.GenUUID()
+	user.Token = uuid
+	user.UpdateTokenByUser()
+	//opts.DB.Model(&user).Where("id = ?", user.ID).Update("token", user.Token)
+}
+func TestClear(t *testing.T) {
+	opts.LoadConfig("../conf.toml")
+	opts.InitDB()
+	var user opts.User
+	user.QueryByEntry("test", "123123")
+
+	user.ClearTokenByUser()
+
+}

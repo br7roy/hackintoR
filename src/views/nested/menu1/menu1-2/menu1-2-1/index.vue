@@ -41,8 +41,6 @@ export default {
   methods: {
     onSubmit() {
       this.$message('submit!')
-      // this.form.startTime = this.$formatDate(this.form.startTime)
-      console.log(JSON.stringify(this.form))
       this.$post('/daily',
         this.form)
         .then((response) => {

@@ -66,6 +66,8 @@ func main() {
 		openPage()
 	}
 
+	opts.InitDB()
+
 	handleSignals()
 
 	// test fo echo server ,ignore it
@@ -79,7 +81,7 @@ func main() {
 
 func parseFlags() {
 	config = &Config{}
-	flag.StringVar(&config.ServerHost, "p", "localhost:20000", "local server address")
+	flag.StringVar(&config.ServerHost, "p", "0.0.0.0:20000", "local server address")
 	flag.StringVar(&config.ConfigPath, "c", "./conf.toml", "config file path")
 	flag.Usage = func() {
 		fmt.Fprintf(Stderr, "Usage of %s:\n", os.Args[0])

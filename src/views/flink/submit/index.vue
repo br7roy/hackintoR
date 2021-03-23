@@ -52,7 +52,6 @@ export default {
   methods: {
     UploadJA(param) {
       const form = this.$refs['form'].$el
-      console.log(form)
       if (!this.form.appId) {
         this.$message.warning('请输入appID')
         return

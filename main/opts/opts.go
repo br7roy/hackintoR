@@ -41,6 +41,9 @@ func (se *Opts) mallocRegHandler() {
 	se.mux.HandleFunc("/ssupload", se.ssupload)
 	se.mux.HandleFunc("/localshell", se.localShell)
 	se.mux.HandleFunc("/bt", se.batchTask)
+	se.mux.HandleFunc("/login", se.login)
+	se.mux.HandleFunc("/usrinfo", se.usrinfo)
+	se.mux.HandleFunc("/logout", se.logout)
 
 }
 
@@ -287,6 +290,51 @@ func (se *Opts) batchTask(w http.ResponseWriter, r *http.Request) {
 		LeverTask(params.Stat, elem, params.JobId)
 	}
 	w.Write(respSer(0, "任务提交成功"))
+}
+
+func (se *Opts) login(w http.ResponseWriter, r *http.Request) {
+	p, done := valid(w, r)
+	if done {
+		return
+	}
+	var user User
+	entry, err := user.QueryByEntry(p.LoginName, p.Password)
+	//token
+	if err != nil {
+		w.Write(respSer(1, "密码不正确"))
+	} else {
+		uuid := GenUUID()
+		entry.Token = uuid
+		entry.UpdateTokenByUser()
+		w.Write(respSer(0, entry))
+	}
+
+}
+
+func (se *Opts) usrinfo(w http.ResponseWriter, r *http.Request) {
+	vars := r.URL.Query()
+	token := vars["token"][0]
+	var user User
+	entry, err := user.QueryByToken(token)
+	//token
+	if err != nil {
+		w.Write(respSer(1, "用户不存在"))
+	} else {
+		w.Write(respSer(0, entry))
+	}
+
+}
+
+func (se *Opts) logout(w http.ResponseWriter, r *http.Request) {
+	vars := r.URL.Query()
+	token := vars["token"][0]
+	var user User
+	_, err := user.QueryByToken(token)
+	if err == nil {
+		user.ClearTokenByUser()
+	}
+	w.Write(respSer(0, "clear!"))
+
 }
 
 func valid(w http.ResponseWriter, r *http.Request) (Params, bool) {

@@ -46,7 +46,6 @@ export default {
   methods: {
     onSubmit() {
       this.$message('submit!')
-      console.log(JSON.stringify(this.form))
       this.$post('/py',
         this.form)
         .then((response) => {
