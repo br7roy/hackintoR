@@ -1,29 +1,10 @@
 # hackintoR
 
-## Project setup
+## Project build
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+sh configure && make
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### generate css via gulp
-```
-npm run buildcss
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
