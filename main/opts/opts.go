@@ -318,7 +318,7 @@ func (se *Opts) usrinfo(w http.ResponseWriter, r *http.Request) {
 	entry, err := user.QueryByToken(token)
 	//token
 	if err != nil {
-		w.Write(respSer(1, "用户不存在"))
+		w.Write(respSer(1, "重新登录试试"))
 	} else {
 		w.Write(respSer(0, entry))
 	}
