@@ -53,140 +53,15 @@ type = 7
 
 [app.db]
 userName = "root"
-password="mobtech2019java"
-url = "10.21.33.29"
+password="*****"
+url = "*******"
 port = 3306
-storeHouse = "gtor"
+storeHouse = "***"
 type = "mysql"
 
 [[queue]]
 queueName = "root.app"
 
 [[queue]]
-queueName = "root.yanjiuyuan"
+queueName = "root.app2"
 
-[[queue]]
-queueName = "root.yarn_ping_cone"
-
-[[queue]]
-queueName = "root.mob_ronghui"
-
-[[queue]]
-queueName = "urgent"
-
-[[queue]]
-queueName = "root.yarn_app360.app360_test"
-
-[[queue]]
-queueName = "root.yarn_app360.app360"
-
-[[queue]]
-queueName = "root.yarn_ga_distcp_hfile"
-
-[[queue]]
-queueName = "root.yarn_analyst.analyst1"
-
-[[queue]]
-queueName = "root.yarn_analyst.analyst2"
-
-[[queue]]
-queueName = "root.yarn_analyst.analyst3"
-
-[[queue]]
-queueName = "root.yarn_dataengine_ai.dataengine_ai_test"
-
-[[queue]]
-queueName = "root.yarn_dataengine_ai.dataengine_ai"
-
-[[queue]]
-queueName = "root.yarn_dpi.dpi_test"
-
-[[queue]]
-queueName = "root.yarn_dpi.dpi"
-
-[[queue]]
-queueName = "root.yarn_etl.etl_test"
-
-[[queue]]
-queueName = "root.yarn_etl.etl"
-
-[[queue]]
-queueName = "root.yarn_mobdashboard.mobdashboard_test"
-
-[[queue]]
-queueName = "root.yarn_mobdashboard.mobdashboard"
-
-[[queue]]
-queueName = "root.yarn_datax.datax_test"
-
-[[queue]]
-queueName = "root.yarn_datax.datax"
-
-[[queue]]
-queueName = "root.yarn_marketplus.marketplus_test"
-
-[[queue]]
-queueName = "root.yarn_marketplus.marketplus"
-
-[[queue]]
-queueName = "root.yarn_ping_cone"
-
-[[queue]]
-queueName = "root.yarn_ga.ga_test"
-
-[[queue]]
-queueName = "root.yarn_ga.ga"
-
-[[queue]]
-queueName = "root.yarn_mobfin.mobfin_test"
-
-[[queue]]
-queueName = "root.yarn_mobfin.mobfin"
-
-[[queue]]
-queueName = "root.yarn_mobeye.mobeye_test"
-
-[[queue]]
-queueName = "root.yarn_mobeye.mobeye"
-
-[[queue]]
-queueName = "root.yarn_etl_streaming"
-
-[[queue]]
-queueName = "root.yarn_distcp_hfile.master"
-
-[[queue]]
-queueName = "root.yarn_distcp_hfile.slave"
-
-[[queue]]
-queueName = "root.yarn_realestate.realestate_test"
-
-[[queue]]
-queueName = "root.yarn_realestate.realestate"
-
-[[queue]]
-queueName = "root.yarn_mobdi.mobdi_test"
-
-[[queue]]
-queueName = "root.yarn_mobdi.dba"
-
-[[queue]]
-queueName = "root.default"
-
-[[queue]]
-queueName = "root.yarn_dataengine.dataengine_mr"
-
-[[queue]]
-queueName = "root.yarn_dataengine.dataengine_test"
-
-[[queue]]
-queueName = "root.yarn_dataengine.dataengine"
-
-[[queue]]
-queueName = "root.yarn_supplement_data"
-
-[[queue]]
-queueName = "root.yarn_qc.qc_test"
-
-[[queue]]
-queueName = "root.yarn_qc.qc"
