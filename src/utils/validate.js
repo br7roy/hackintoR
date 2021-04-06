@@ -17,3 +17,9 @@ export function isExternal(path) {
 export function validUsername(str) {
   return /^\w+$/.test(str)
 }
+
+export function validSchUsername(str) {
+  console.log('kaishijiaoyan')
+  console.log(str)
+  return /[a-zA-Z]/.test(str)
+}

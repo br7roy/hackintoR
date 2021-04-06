@@ -29,6 +29,11 @@ Vue.use(Router)
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+import Sch from '@/views/sch'
+cmps : {
+  Layout,
+    Sch
+}
 export const constantRoutes = [
   {
     path: '/login',
@@ -100,13 +105,13 @@ export const constantRoutes = [
         path: 'bof',
         name: 'Bof',
         component: () => import('@/views/sch/bof'),
-        meta: { title: '批量成败' }
+        meta: { title: '批量task成败/启停' }
       },
       {
         path: 'bss',
         name: 'Bss',
         component: () => import('@/views/sch/bss'),
-        meta: { title: '批量启停' }
+        meta: { title: '批量job成败/启停' }
       }
     ]
   },

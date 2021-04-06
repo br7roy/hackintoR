@@ -9,7 +9,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 const param = {
   $store: store,
-  ...mapState(['app.form.prdEnv'])
+  ...mapState(['app.form.prdEnv', 'app.form.schUserName'])
 }
 
 const headers = {
@@ -125,6 +125,10 @@ function holeStageParamInterceptor(data) {
     }
     // data.setProperty('prdEnv', param.$store.getters.prdEnv)
     data.prdEnv = param.$store.getters.prdEnv
+    data.schUserName = param.$store.getters.schUserName
+    console.log('axios.')
+    console.log(param.$store.getters.schUserName)
+    console.log(data.schUserName)
   }
   console.log('requestData:\n')
   console.log(data)

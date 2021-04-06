@@ -18,8 +18,6 @@ type Opts struct {
 	mux *http.ServeMux
 }
 
-const uploadPath = "/opt/flink/conf"
-
 func WakeOpts(initOpts InitOptions) *Opts {
 	opt := new(Opts)
 	opt.mux = initOpts.Mux
@@ -44,6 +42,7 @@ func (se *Opts) mallocRegHandler() {
 	se.mux.HandleFunc("/login", se.login)
 	se.mux.HandleFunc("/usrinfo", se.usrinfo)
 	se.mux.HandleFunc("/logout", se.logout)
+	se.mux.HandleFunc("/bj", se.batchJob)
 
 }
 
@@ -287,7 +286,7 @@ func (se *Opts) batchTask(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(params)
 	for _, elem := range params.TaskId {
-		LeverTask(params.Stat, elem, params.JobId)
+		LeverTask(params.Stat, elem, params.JobId, params.SchUserName)
 	}
 	w.Write(respSer(0, "任务提交成功"))
 }
@@ -326,8 +325,7 @@ func (se *Opts) usrinfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func (se *Opts) logout(w http.ResponseWriter, r *http.Request) {
-	vars := r.URL.Query()
-	token := vars["token"][0]
+	token := r.URL.Query()["token"][0]
 	var user User
 	_, err := user.QueryByToken(token)
 	if err == nil {
@@ -335,6 +333,21 @@ func (se *Opts) logout(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(respSer(0, "clear!"))
 
+}
+
+func (se *Opts) batchJob(w http.ResponseWriter, r *http.Request) {
+	params, done := valid(w, r)
+	if done {
+		return
+	}
+	fmt.Println(params)
+	for _, jobId := range params.JobIds {
+		tIds := GetTaskListsByJobIds(jobId, params.SchUserName)
+		for _, taskId := range tIds {
+			LeverTask(params.Stat, taskId, jobId, params.SchUserName)
+		}
+	}
+	w.Write(respSer(0, "任务提交成功"))
 }
 
 func valid(w http.ResponseWriter, r *http.Request) (Params, bool) {

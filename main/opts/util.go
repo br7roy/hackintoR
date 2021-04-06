@@ -102,10 +102,10 @@ func localPerform(shell string) (bool, string) {
 	}
 }
 
-func LeverTask(stat int, taskId int, jobId int) (bool, string) {
+func LeverTask(stat int, taskId int, jobId int, username string) (bool, string) {
 
 	t := &Task{}
-	t.UserName = Cfg.App.Schedule.UserName
+	t.UserName = username
 	t.JobId = jobId
 	t.TaskId = taskId
 	t.Status = stat
@@ -113,15 +113,44 @@ func LeverTask(stat int, taskId int, jobId int) (bool, string) {
 	if err != nil {
 		return false, ""
 	}
-
+	// todo toBe const
 	return JsonPost("http://scheduler.paas.internal.mob.com/api/markTaskStatus",
 		string(jsonB),
 	)
 
 }
 
+func GetTaskListsByJobIds(jobId int, userName string) []int {
+	req := SchGettasklistsbyjobidsReq{}
+	req.UserName = userName
+	req.JobID = jobId
+	req.PageIndex = 1
+	req.PageSize = 10
+	jsonB, err := json.Marshal(req)
+	suc, content := JsonPost("http://scheduler.paas.internal.mob.com/api/getTaskList",
+		string(jsonB),
+	)
+
+	if !suc {
+		return nil
+	}
+
+	resp := SchGettasklistsbyjobidsResp{}
+
+	if err = json.Unmarshal([]byte(content), &resp); err != nil {
+		return nil
+	}
+	var taskIds []int
+	for _, ele := range resp.Data {
+		taskIds = append(taskIds, ele.TaskID)
+	}
+	return taskIds
+}
+
 func JsonPost(url string, reqData string) (bool, string) {
 	contentType := "application/json"
+	fmt.Printf("request:\n")
+	fmt.Println(reqData)
 	resp, err := http.Post(url, contentType, strings.NewReader(reqData))
 	if err != nil {
 		fmt.Printf("post failed, err:%v\n", err)

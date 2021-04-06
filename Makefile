@@ -12,7 +12,6 @@ NPM_PACK=npm run build:prod
 DIST_DIR=./release
 GO_CLEAN=go clean
 NPM_CLEAN=npm cache clean -f
-BASEDIR="$( cd "$(dirname "$1")" ; pwd -P )"
 NODE_PATH=/usr/local
 NODE_VERSION=15.12.0
 GO_PATH=/usr/local

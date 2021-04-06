@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     UploadJA(param) {
-      const form = this.$refs['form'].$el
       if (!this.form.appId) {
         this.$message.warning('请输入appID')
         return
@@ -67,12 +66,10 @@ export default {
       this
         .$post('ssupload', formData)
         .then(response => {
-          if (response.code === 0) {
-            this.$message({
-              message: response.data.toString(),
-              type: response.code === 0 ? 'success' : 'error'
-            })
-          }
+          this.$message({
+            message: response.data.toString(),
+            type: response.code === 0 ? 'success' : 'error'
+          })
         })
         .catch(function(error) {
           console.log(error)

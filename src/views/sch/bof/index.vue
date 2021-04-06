@@ -1,22 +1,22 @@
 <template>
   <div class="app-container">
-    <el-alert :closable="false" title="批量修改任务状态" type="warning" />
-
+    <el-alert :closable="false" title="批量修改task状态,启停还未实现" type="warning" />
+    <Sch/>
     <el-form ref="form" :model="form" label-width="120px">
       <el-form-item :rules="{require:true}" label="JobId">
         <el-col :span="15">
-          <el-input-number v-model="form.jobId" placeholder="填入JobId" style="width: 100%;"/>
+          <el-input-number v-model="form.jobId" placeholder="填入JobId" style="width: 150px;"/>
         </el-col>
       </el-form-item>
       <el-form-item :rules="{require:true}" label="从这个taskId开始">
         <el-col :span="15">
-          <el-input-number v-model="form.taskId1" placeholder="填入taskId" style="width: 50%;"/>
+          <el-input-number v-model="form.taskId1" placeholder="填入taskId" style="width: 300px;"/>
         </el-col>
       </el-form-item>
       -
       <el-form-item :rules="{require:true}" label="至这个taskId结束">
         <el-col :span="15">
-          <el-input-number v-model="form.taskId2" placeholder="填入taskId" style="width: 50%"/>
+          <el-input-number v-model="form.taskId2" placeholder="填入taskId" style="width: 300px"/>
         </el-col>
       </el-form-item>
 
@@ -32,8 +32,12 @@
 </template>
 
 <script>
-export default {
+import Sch from '@/views/sch'
 
+export default {
+  components: {
+    Sch
+  },
   data() {
     return {
       form: {

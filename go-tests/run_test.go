@@ -164,3 +164,8 @@ func TestClear(t *testing.T) {
 	user.ClearTokenByUser()
 
 }
+
+func TestFindTaskByJID(t *testing.T) {
+	ids := opts.GetTaskListsByJobIds(177589, "futx")
+	fmt.Printf("%v\n", ids)
+}

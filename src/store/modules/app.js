@@ -8,7 +8,8 @@ const state = {
   },
   device: 'desktop',
   form: {
-    prdEnv: false
+    prdEnv: false,
+    schUserName: ''
   }
 }
 
@@ -32,6 +33,11 @@ const mutations = {
   },
   CHANGE_ENV: (state, env) => {
     state.form.prdEnv = env
+  },
+  CHANGE_SUN: (state, suname) => {
+    console.log('app.')
+    console.log(state.form.schUserName)
+    state.form.schUserName = suname
   }
 }
 
@@ -47,8 +53,10 @@ const actions = {
   },
   changeEnv({ commit }, env) {
     commit('CHANGE_ENV', env)
+  },
+  changeSchUserName({ commit }, suname) {
+    commit('CHANGE_SUN', suname)
   }
-
 }
 
 export default {

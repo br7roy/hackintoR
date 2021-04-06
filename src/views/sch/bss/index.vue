@@ -1,25 +1,19 @@
 <template>
   <div class="app-container">
-    <el-alert :closable="false" title="批量修改任务状态" type="warning" />
-
+    <el-alert :closable="false" title="批量修改job下所有task状态,启停还未实现" type="warning" />
+    <Sch/>
     <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item :rules="{require:true}" label="JobId">
+      <el-form-item :rules="{require:true}" label="从这个JobId开始">
         <el-col :span="15">
-          <el-input-number v-model="form.jobId" placeholder="填入JobId" style="width: 100%;"/>
-        </el-col>
-      </el-form-item>
-      <el-form-item :rules="{require:true}" label="从这个taskId开始">
-        <el-col :span="15">
-          <el-input-number v-model="form.taskId1" placeholder="填入taskId" style="width: 50%;"/>
+          <el-input-number v-model="form.jobId1" placeholder="填入JobId" style="width: 300px;"/>
         </el-col>
       </el-form-item>
       -
-      <el-form-item :rules="{require:true}" label="至这个taskId结束">
+      <el-form-item :rules="{require:true}" label="至这个JobId结束">
         <el-col :span="15">
-          <el-input-number v-model="form.taskId2" placeholder="填入taskId" style="width: 50%"/>
+          <el-input-number v-model="form.jobId2" placeholder="填入JobId" style="width: 300px"/>
         </el-col>
       </el-form-item>
-
       <el-form-item :rules="{require:true}" label="Ok or fail">
         <el-switch v-model="form.stat" />
       </el-form-item>
@@ -32,16 +26,18 @@
 </template>
 
 <script>
+import Sch from '@/views/sch'
 export default {
-
+  components: {
+    Sch
+  },
   data() {
     return {
       form: {
-        jobId: 0,
-        taskId: [],
+        jobIds: [],
         stat: false,
-        taskId1: 0,
-        taskId2: 0
+        jobId1: 0,
+        jobId2: 0
       },
       data: '',
       code: ''
@@ -49,9 +45,8 @@ export default {
   },
   methods: {
     onSubmit() {
-
-      for (let i = this.form.taskId1; i <= this.form.taskId2; i++) {
-        this.form.taskId.push(i)
+      for (let i = this.form.jobId1; i <= this.form.jobId2; i++) {
+        this.form.jobIds.push(i)
       }
       if (!this.form.stat) {
         this.form.stat = 5
@@ -59,7 +54,7 @@ export default {
         this.form.stat = 4
       }
       this
-        .$post('bt', this.form)
+        .$post('bj', this.form)
         .then(response => {
           if (response.code === 0) {
             this.$message({
