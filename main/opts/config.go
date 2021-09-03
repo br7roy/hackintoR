@@ -55,13 +55,13 @@ var (
 
 func LoadConfig(cPath string) *TomlConfig {
 	once.Do(func() {
-		Cfg = load(cPath)
+		Cfg = loadConfByPath(cPath)
 	})
 	return Cfg
 
 }
 
-func load(cPath string) *TomlConfig {
+func loadConfByPath(cPath string) *TomlConfig {
 	filePath, err := filepath.Abs(cPath)
 	if err != nil {
 		panic(err)
@@ -85,7 +85,7 @@ func load(cPath string) *TomlConfig {
 // reload config
 func TriggerReload(confPath string) bool {
 	fmt.Println("reload config start")
-	Cfg = load(confPath)
+	Cfg = loadConfByPath(confPath)
 	fmt.Println("reload config done")
 	return true
 }

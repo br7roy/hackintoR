@@ -28,7 +28,6 @@ func getParams(r *http.Request) (param Params, err error) {
 	//todo basic validator
 	return param, nil
 }
-
 func jsonEncode(code int, data interface{}) []byte {
 	tr := new(JsonResult)
 	tr.Code, tr.Data = code, data

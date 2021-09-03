@@ -18,17 +18,18 @@ type Params struct {
 	Uuids     []struct {
 		Value string `json:"value"`
 	} `json:"uuids"`
-	Cmd         string `json:"cmd"`
-	Secreat     string `json:"secreat"`
-	ClsName     string `json:"clsName"`
-	JobId       int    `json:"jobId"`
-	TaskId      []int  `json:"taskId"`
-	JobIds      []int  `json:"jobIds"`
-	SchUserName string `json:"schUserName"`
-	Stat        int    `json:"stat"`
-	LoginName   string `json:"loginName"`
-	Password    string `json:"password"`
-	Token       string `json:"token"`
+	Cmd         string     `json:"cmd"`
+	Secreat     string     `json:"secreat"`
+	ClsName     string     `json:"clsName"`
+	JobId       int        `json:"jobId"`
+	TaskId      []int      `json:"taskId"`
+	JobIds      []int      `json:"jobIds"`
+	SchUserName string     `json:"schUserName"`
+	Stat        int        `json:"stat"`
+	LoginName   string     `json:"loginName"`
+	Password    string     `json:"password"`
+	Token       string     `json:"token"`
+	ConfParam   TomlConfig `json:"confParam"`
 }
 
 type JsonResult struct {
@@ -43,6 +44,7 @@ type Task struct {
 	UserName string `json:"user_name"`
 }
 
+// 调度系统请求参数
 type SchGettasklistsbyjobidsReq struct {
 	StartBeginTime interface{} `json:"start_begin_time"`
 	Content        interface{} `json:"content"`
@@ -61,6 +63,8 @@ type SchGettasklistsbyjobidsReq struct {
 	EndBeginTime interface{} `json:"end_begin_time"`
 	EndDataTime  interface{} `json:"end_data_time"`
 }
+
+// 调度系统返回参数
 type SchGettasklistsbyjobidsResp struct {
 	Msg   string `json:"msg"`
 	Total int    `json:"total"`

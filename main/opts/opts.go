@@ -43,6 +43,8 @@ func (se *Opts) mallocRegHandler() {
 	se.mux.HandleFunc("/usrinfo", se.usrinfo)
 	se.mux.HandleFunc("/logout", se.logout)
 	se.mux.HandleFunc("/bj", se.batchJob)
+	se.mux.HandleFunc("/readconf", se.readConf)
+	se.mux.HandleFunc("/bumpconf", se.bumpconf)
 
 }
 
@@ -348,6 +350,23 @@ func (se *Opts) batchJob(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	w.Write(respSer(0, "任务提交成功"))
+}
+
+func (se *Opts) readConf(w http.ResponseWriter, r *http.Request) {
+	w.Write(respSer(0, Cfg))
+	w.WriteHeader(200)
+}
+
+func (se *Opts) bumpconf(w http.ResponseWriter, r *http.Request) {
+	params, done := valid(w, r)
+	if done {
+		return
+	}
+	fmt.Println(params)
+	Cfg = &params.ConfParam
+	w.Write(respSer(0, "更新配置成功"))
+	w.WriteHeader(200)
+
 }
 
 func valid(w http.ResponseWriter, r *http.Request) (Params, bool) {
