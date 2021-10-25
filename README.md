@@ -1,4 +1,6 @@
 # hackintoR
+## Flow
+![Imgur](https://i.imgur.com/uV4WDOO.png)
 
 ## Project build
 ```
@@ -6,5 +8,5 @@ sh configure && make
 ```
 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### LICENSE  
+MIT
