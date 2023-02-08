@@ -41,8 +41,8 @@ modules:	native
 	$(NPM_CLEAN)
 
 native:	.bashrc
-	if [ -z "$(echo $(whereis g++) | tr 'g++:' ' ')" ]; then apt install gcc-c++ -y  ;fi
-	apt install python38.x86_64 -y
+	if [ -z "$(echo $(whereis g++) | tr 'g++:' ' ')" ]; then yum install gcc-c++ -y  ;fi
+	yum install python38.x86_64 -y
 	source /$(shell whoami)/$^
 	go get github.com/rakyll/statik
 
