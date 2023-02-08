@@ -9,7 +9,8 @@ on:
 jobs:
   build:
 
-    runs-on: centos-latest
+    runs-on: ubuntu-18.04
+    container: centos:7
 
     steps:
     - uses: actions/checkout@v3
