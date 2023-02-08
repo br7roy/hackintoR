@@ -64,7 +64,7 @@ world:
 		sleep 2; \
 	else \
 		echo "The current os is not supported" 1>&2; \
-		exit 1; \
+		# exit 1; \
 	fi
 	@if type node >/dev/null 2>&1; then \
 		echo 'exists node' ; \
