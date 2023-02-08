@@ -1,7 +1,7 @@
 #!/bin/env bash
 
 
-yum install curl ncurses make -y 2>/dev/null
+yum install curl ncurses make npm -y 2>/dev/null
 
 
 echo "Done"
